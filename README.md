@@ -12,11 +12,11 @@ How to compile all the details of AToverMBIMTool_CMD could be found in below:<br
     4. `popd`
 
 ## 2. Package deb format
-How to package deb format all the details of AToverMBIMTool_CMD could be found in below:<br>
-    1. create a directory, such as "attool2.0.0.4_cmd", it include "DEBIAN" and "usr" directories.
-    2. Edit "DEBIAN"
-	(1)"control" file:Introduce the basic name, content, author, version, purpose, etc. of the document, \
-	which can be filled in according to the situation.
+- How to package deb format all the details of AToverMBIMTool_CMD could be found in below:<br>
+    1. create a directory, such as "attool2.0.0.4_cmd", it include "DEBIAN" and "usr" directories..<br>
+    2. Edit "DEBIAN".<br>
+	(1)"control" file:Introduce the basic name, content, author, version, purpose, etc. of the document,<br>
+	which can be filled in according to the situation.<br>
     3. `sudo make install`
     4. `popd`
 
