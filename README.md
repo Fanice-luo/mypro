@@ -15,14 +15,14 @@ How to compile all the details of AToverMBIMTool_CMD could be found in below:<br
 - How to package deb format all the details of AToverMBIMTool_CMD could be found in below:<br>
     1. Create a directory, such as "attool2.0.0.4_cmd", it include "DEBIAN" and "usr" directories.<br>
     2. Edit "DEBIAN"<br>
-	(1) "control" file: Introduce the basic name, content, author, version, purpose, etc. of the<br>
+	-- "control" file: Introduce the basic name, content, author, version, purpose, etc. of the<br>
 	AToverMBIMTool_CMD, which can be filled in according to the situation.<br>
-	(2) "postinst" file: The directory to be created during the installation process and the icon configuration file<br>
+	-- "postinst" file: The directory to be created during the installation process and the icon configuration file<br>
 	to be copied to the specified directory, etc.<br>
-	(3) "postrm" file: The deletion process requires deleting directory files, etc.<br>
+	-- "postrm" file: The deletion process requires deleting directory files, etc.<br>
     3. Edit "usr"<br>
-	(1) "bin" file: It will be used to store executable binary program.<br>
-	(2) "lib/libattool_foxconn_cmd" file: It will be used to store dynamic library by executable binary program.<br>
+	-- "bin" file: It will be used to store executable binary program.<br>
+	-- "lib/libattool_foxconn_cmd" file: It will be used to store dynamic library by executable binary program.<br>
     4. `sudo cp /usr/bin/attool-cmd attool2.0.0.4_cmd/usr/bin/`
     5. `sudo cp /usr/libattool_foxconn_cmd/libattool.so attool2.0.0.4_cmd/usr/lib/libattool_foxconn_cmd/`
     6. `dpkg-deb --build attool2.0.0.4_cmd/`
