@@ -4,75 +4,54 @@
 # Building on Ubuntu
 
 ## 1. Build
-All details of build all valid parameters could be found in below:<br>
-- Compile libfiisdk.so for default to SDX55 and SDX20, which needs qmi service dms.<br>
+How to compile all the details of AToverMBIMTool_CMD could be found in below:<br>
+- Firstly, copy the specified version of libfiisdk.so to the "SourceCode" directory. Then, build as follow:<br>
     1. `pushd SourceCode`
     2. `make`
-    3. `popd`
+    3. `sudo make install`
+    4. `popd`
 
-- Compile libfiisdk.so for which needs qmi service fox such as SDX6X/SDX7x/SDX12(no include SDX55, SDX20).<br>
-    1. `pushd SourceCode`
-    2. `make SERVICEORDPR=foxservice`
-    3. `popd`
+## 2. Package deb format
+- How to package deb format all the details of AToverMBIMTool_CMD could be found in below:<br>
+    1. Create a directory, such as "attool2.0.0.4_cmd", it include "DEBIAN" and "usr" directories.<br>
+    2. Edit "DEBIAN"<br>
+	(1) "control" file: Introduce the basic name, content, author, version, purpose, etc. of the<br>
+	AToverMBIMTool_CMD, which can be filled in according to the situation.<br>
+	(2) "postinst" file: The directory to be created during the installation process and the icon configuration file<br>
+	to be copied to the specified directory, etc.<br>
+	(3) "postrm" file: The deletion process requires deleting directory files, etc.<br>
+    3. Edit "usr"<br>
+	(1) "bin" file: It will be used to store executable binary program.<br>
+	(2) "lib/libattool_foxconn_cmd" file: It will be used to store dynamic library by executable binary program.<br>
+    4. `sudo cp /usr/bin/attool-cmd attool2.0.0.4_cmd/usr/bin/`
+    5. `sudo cp /usr/libattool_foxconn_cmd/libattool.so attool2.0.0.4_cmd/usr/lib/libattool_foxconn_cmd/`
+    6. `dpkg-deb --build attool2.0.0.4_cmd/`
 
-- Compile libfiisdk.so for Lenovo-wwan-dpr.<br>
-    1. `pushd SourceCode`
-    2. `make SERVICEORDPR=dprtool`
-    3. `popd`
+## 3. Uninstall deb package
+- If you have an older version tool, you shall uninstall it firstly. The uninstall process of the attool-cmd as below:<br>
+    1. `sudo dpkg -P attool-cmd`
 
-- Compile FccLock for SDX62, which needs qmi service fox.<br>
-    1. `pushd SourceCode`
-    2. `make  SERVICEORDPR=foxservice TOOL=FccLock`
-    3. `popd`
-
-- Compile FoxFlss for SDX62, which needs qmi service fox.<br>
-    1. `pushd SourceCode`
-    2. `make  SERVICEORDPR=foxservice TOOL=FoxFlss`
-    3. `popd`
+## 4. Install deb package
+- The install process of the AT over MBIM Command Line Tool.<br>
+    1. `sudo dpkg -i --force-overwrite XXX.deb`
 
 # Release history
-## 1. Executable binary program
-- FoxFlss version:1.0.1<br>
-    1. Write default configuration for platform which has not RF_Files.<br>
-    2. Add step reboot the module to take effect after writing RF data.<br>
+- attool-cmd version:2.0.0.4<br>
+    1. Add SDX72 support to send at commands.<br>
+    2. Fixed file of *.txt is empty, printf error information.<br>
+    3. Fixed mantis:25131: attool can send blank command.<br>
 
-- FoxFlss version:1.0.0<br>
-  first version, add FoxFlss tool to support Fcc unlock and write RF data.<br>
+- attool-cmd version:2.0.0.3<br>
+    1. After V2.0.0.3, rename OUT_BIN "attool-cmd".<br>
+    2. Use "DealRebootDeviceCommand" to solve misunderstand of at commands that need reboot module.<br>
+    3. Use "Compatibility_Check" to distinguish SDX12 after AP001 use another API to send at command.<br>
+    4. Filter "\n" of "AppendDataToFile" and "AppendATToFile".<br>
 
-- FccLock version:1.0.0<br>
-  first version, add FccLock tool to support Fcc unlock.<br>
+- attool-cmd version:2.0.0.2<br>
+    1. Modify FoxGetFwVersion API location and add DmsAtCommandEvent for sdx55.<br>
 
-## 2. FiiSDK dynamic library
-- libfiisdk.so version:2.1.6<br>
-    1. Packaging the required interfaces for FoxFlss of DW5932e device.<br>
-    2. Write default configuration for platform which has not RF_Files.<br>
-    3. Add step reboot the module to take effect after writing RF data.<br>
+- attool-cmd version:2.0.0.1<br>
+    1. Fixed at commands cannot send after kill mbim-proxy.<br>
 
-- libfiisdk.so version:2.1.5<br>
-    1. Modify Makefile and main.c to build for the Binary files for FccLock of DW5932e device.<br>
-
-- libfiisdk.so version:2.1.4<br>
-    1. Packaging the required interfaces for FccLock of DW5932e device.<br>
-
-- libfiisdk.so version:2.1.3<br>
-    1. Solving the PCIE device Send AT Command response and indication time interval may cause program exit.<br>
-    2. Using the "DealRebootDeviceCommand" API to Resolve Misjudgment of AT Commands that Requires Device Reboot.<br>
-    3. When send at commands such as "ATE", "ATZ" to throw error.<br>
-
-- libfiisdk.so version:2.1.2<br>
-    1. Support SingleSKU_Tool of sdx products(SDX62) which need fox service.<br>
-    2. Add FoxSetNVPathValue_new to support writing efs files larger than 65535 bytes(64K).<br>
-    3. Packaging send at command as SetQtunerStatusOfSingleSKU API for SingleSKU_Tool.<br>
-
-- libfiisdk.so version:2.1.1<br>
-    1. Support FccLock of sdx products(SDX62) which need fox service.<br>
-
-- libfiisdk.so version:2.1.0<br>
-    1. Support to send at commands.<br>
-
-- libdpr.so version:2.0.1<br>
-    1. Fix IMEI missing would lead to unlock bioslock failed issue.<br>
-
-- libdpr.so version:2.0.0<br>
-    1. Support for SDX55 Lenovo-wwan-dpr and init commit.<br>
-    2. Add new FiiSDK to send qmi command, after V2.0.0, all of APIs is foxconn private interface.<br>
+- attool-cmd version:2.0.0.0<br>
+    1. First version, support MBIM device to send at commands.<br>
