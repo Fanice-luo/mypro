@@ -22,7 +22,7 @@ How to compile all the details of AToverMBIMTool_CMD could be found in below:<br
 	(3) "postrm" file: The deletion process requires deleting directory files, etc.<br>
     3. Edit "usr"<br>
 	(1) "bin" file: It will be used to store executable binary program.<br>
-	(2) "lib/libattool_foxconn_cmd" file: It will be used to store dynamic library by executable binary program.<br>
+	(2) "lib/libattool_foxconn_cmd" file: It will be used to store dynamic libraries that need to be linked to executable binary programs.<br>
     4. `sudo cp /usr/bin/attool-cmd attool2.0.0.4_cmd/usr/bin/`
     5. `sudo cp /usr/libattool_foxconn_cmd/libattool.so attool2.0.0.4_cmd/usr/lib/libattool_foxconn_cmd/`
     6. `dpkg-deb --build attool2.0.0.4_cmd/`
