@@ -2,6 +2,7 @@
   - Ubuntu18.04<br>
 
 # Building on Ubuntu
+Building on Ubuntu18.04, it can be used above (include) 18.04.<br>
 
 ## 1. Build
 How to compile all the details of AToverMBIMTool_CMD could be found in below:<br>
@@ -12,7 +13,6 @@ How to compile all the details of AToverMBIMTool_CMD could be found in below:<br
     4. `popd`
 
 ## 2. Package deb format
-Deb package was built in Ubuntu18.04, it can be used above (include) 18.04.<br>
 - How to package deb format all the details of AToverMBIMTool_CMD could be found in below:<br>
     1. Create a directory, such as "attool2.0.0.4_cmd", it include "DEBIAN" and "usr" directories.<br>
     2. Edit "DEBIAN"<br>
